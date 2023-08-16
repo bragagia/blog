@@ -1,0 +1,35 @@
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    version="1.1"
+    width="0"
+    height="0"
+>
+    <defs>
+        <filter id="grain" x="0%" y="0%" width="100%" height="100%">
+            <feTurbulence
+                type="fractalNoise"
+                baseFrequency="0.5"
+                result="NOISE"
+                numOctaves="2"
+            />
+            <feColorMatrix
+                in="NOISE"
+                type="matrix"
+                values=" 
+        0.33 0.33 0.33 0 0 
+        0.33 0.33 0.33 0 0 
+        0.33 0.33 0.33 0 0 
+        0 0 0 1 0"
+                result="GREYNOISE"
+            />
+            <feComponentTransfer in="GREYNOISE" result="TRANSPARENTNOISE">
+                <feFuncA type="table" tableValues="0 0.5" />
+            </feComponentTransfer>
+            <feBlend
+                in="SourceGraphic"
+                in2="TRANSPARENTNOISE"
+                mode="multiply"
+            />
+        </filter>
+    </defs>
+</svg>
