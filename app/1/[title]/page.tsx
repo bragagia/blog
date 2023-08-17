@@ -19,7 +19,7 @@ export default function ArticleOne() {
           Seriously, have you ever tried bitting a lemon? The only way to make
           it taste good is to add a fuckton of sugar to make it taste
           acceptable. Well, i tasted a pretty bad lemon not long ago, and it was
-          aweful. It was called &apos;employment&apos;.
+          aweful. It was called "employment".
         </p>
 
         <p>PS: I actually like lemons btw</p>
