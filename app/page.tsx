@@ -52,7 +52,7 @@ export default async function Home() {
 
           <ArticleLink
             number="1"
-            title="This is the start"
+            title="This is the beginning"
             subtitle="When life give you lemons, go find an apple tree. Lemons sucks."
             date="16 august"
           />

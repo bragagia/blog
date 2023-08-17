@@ -59,9 +59,10 @@ export function BlogHeader() {
         </Link>
 
         <p className="crimson italic text-md md:max-w-xs my-2 text-justify text-gray-700">
-          Life is a dance in which you must opt to either follow the structured
+          Life is a dance in which one must opt to either follow the structured
           choreography of a maestro or move freely to the rhythm of one's soul.
-          Both are great, yet only the latter can bring unexplored ideas.
+          Each has its merit, but only the latter can bring unexplored ideas.
+          Yet, I dance!
         </p>
       </div>
 
