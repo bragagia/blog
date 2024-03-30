@@ -1,3 +1,5 @@
+"use client";
+
 import dayjs, { Dayjs } from "dayjs";
 import SunCalc from "suncalc";
 
