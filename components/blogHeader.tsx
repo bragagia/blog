@@ -50,7 +50,7 @@ export function BlogHeader() {
   return (
     <header>
       <div className="flex flex-col md:flex-row items-center justify-between md:mt-8 mb-8">
-        <Link href="/">
+        <Link href="/blog">
           <h1 className="prata text-4xl md:text-5xl my-2 font-bold">
             Mathias
             <br />

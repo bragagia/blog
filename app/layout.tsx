@@ -13,11 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={"cormorant"}>
-        <div className="container mx-auto px-6 md:px-12 p-2 my-12">
-          {children}
-        </div>
-      </body>
+      <body className="cormorant">{children}</body>
     </html>
   );
 }
