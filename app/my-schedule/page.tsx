@@ -91,9 +91,8 @@ export default function MyLifeInWeeksPage() {
       <div>
         <p>Dates de changements:</p>
         {Array.from(Array(365).keys()).map((i) => {
-          const date = dayjs().startOf("year").add(i, "day");
-          const prevDate = date.add(-1, "day");
-
+          // TODAY
+          const date = dayjs().startOf("year").add(i, "day").add(4, "hours"); // Add 4 hours to avoid DST
           const { sunrise: sunriseDate } = SunCalc.getTimes(
             date.toDate(),
             48.110686,
@@ -101,11 +100,9 @@ export default function MyLifeInWeeksPage() {
           );
           const dateMinutesToAdd = 30 - (sunriseDate.getMinutes() % 30);
           const sunrise = dayjs(sunriseDate).add(dateMinutesToAdd, "minutes");
-          const dateMinutesSinceMidnight = sunrise.diff(
-            sunrise.startOf("day"),
-            "minutes"
-          );
 
+          // PREV
+          const prevDate = date.add(-1, "day");
           const { sunrise: prevSunriseDate } = SunCalc.getTimes(
             prevDate.toDate(),
             48.110686,
@@ -116,12 +113,8 @@ export default function MyLifeInWeeksPage() {
             prevDateMinutesToAdd,
             "minutes"
           );
-          const prevDateMinutesSinceMidnight = prevSunrise.diff(
-            prevSunrise.startOf("day"),
-            "minutes"
-          );
 
-          if (!(dateMinutesSinceMidnight === prevDateMinutesSinceMidnight)) {
+          if (!sunrise.isSame(prevSunrise.add(1, "day"), "minute")) {
             return (
               <p key={i} className="my-2">
                 {date.format("DD/MM")} -&gt; {sunrise.format("HH:mm")}
