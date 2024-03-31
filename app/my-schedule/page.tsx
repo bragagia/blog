@@ -17,8 +17,22 @@ dayjs.extend(isoWeeksInYear);
 
 import classNames from "classnames";
 import isLeapYear from "dayjs/plugin/isLeapYear";
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 dayjs.extend(isLeapYear);
+
+function useNow() {
+  const [now, setNow] = useState(dayjs());
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setNow(dayjs());
+    }, 1000 * 60); // Every minute
+
+    return () => clearInterval(interval);
+  }, []);
+
+  return now;
+}
 
 export default function MyLifeInWeeksPage() {
   const todayWakeUpTime = calcWakeUpTime(dayjs());
@@ -27,15 +41,21 @@ export default function MyLifeInWeeksPage() {
   const { sunrise } = SunCalc.getTimes(new Date(), 48.110686, 6.562007);
   const timeSinceSunrise = dayjs().diff(dayjs(sunrise), "minutes");
   const suntimeHour = dayjs()
-    .set("hours", 7)
-    .set("minutes", 30)
+    .set("hours", 8)
+    .set("minutes", 0)
     .add(timeSinceSunrise, "minutes");
+
+  const now = useNow();
 
   return (
     <div className="mx-auto p-6 md:px-12 font-serif">
       <div className="flex flex-col items-center text-3xl mb-10">
-        <p>Time: {dayjs().format("HH:mm")}</p>
+        <p>Time: {now.format("HH:mm")}</p>
         <p>SunTime: {suntimeHour.format("HH:mm")}</p>
+        <p>
+          diff:
+          {" " + suntimeHour.diff(now, "minutes")}min
+        </p>
       </div>
 
       <div className="flex flex-row gap-10">
@@ -50,7 +70,7 @@ export default function MyLifeInWeeksPage() {
         </div>
 
         <div className="opacity-40">
-          <h2 className="text-xl text-center">Today (suntime):</h2>
+          <h2 className="text-xl text-center">Suntime schedule:</h2>
           <DailyEvents wakeUpTime={dayjs().set("hours", 8).set("minutes", 0)} />
         </div>
       </div>
@@ -62,10 +82,10 @@ export default function MyLifeInWeeksPage() {
 
         {Array.from(Array(365).keys()).map((i) => {
           const date = dayjs().startOf("year").add(i, "day").add(4, "hours"); // Add 4 hours to avoid DST
-          const dateWakeUpTime = calcWakeUpTime(date);
+          const dateWakeUpTime = calcWakeUpTime(date, 30);
 
           const nextDate = date.add(1, "day");
-          const nextWakeUpTime = calcWakeUpTime(nextDate);
+          const nextWakeUpTime = calcWakeUpTime(nextDate, 30);
 
           if (!dateWakeUpTime.isSame(nextWakeUpTime.add(-1, "day"), "minute")) {
             return (
@@ -150,15 +170,17 @@ function DailyEvents({
   );
 }
 
-function calcWakeUpTime(date: Dayjs) {
+function calcWakeUpTime(date: Dayjs, modulo?: number) {
   const { sunrise } = SunCalc.getTimes(date.toDate(), 48.110686, 6.562007);
   sunrise.setSeconds(0, 0);
 
-  const idealWakeUpTime = dayjs(sunrise).add(15, "minutes");
+  const offset = modulo ? modulo / 2 : 0;
+  const idealWakeUpTime = dayjs(sunrise).add(-offset, "minutes");
 
-  const MODULO = 30;
-  const minutesToAdd =
-    MODULO - (idealWakeUpTime.toDate().getMinutes() % MODULO);
+  let minutesToAdd = 0;
+  if (modulo) {
+    minutesToAdd = modulo - (idealWakeUpTime.toDate().getMinutes() % modulo);
+  }
 
   const wakeUpTimeDate = idealWakeUpTime.add(minutesToAdd, "minutes"); // new Date(idealWakeUpTime.toDate().getTime() + minutesToAdd * 60000);
 
@@ -171,22 +193,23 @@ function EventHolder({
   children: ReactNode;
   showStick?: boolean;
 }) {
+  const now = useNow();
+
   const height = (24 * 60) / 2;
-  const minutesSinceMidnigt = dayjs().diff(dayjs().startOf("day"), "minutes");
+  const minutesSinceMidnigt =
+    now.diff(now.startOf("day").set("hours", 4), "minutes") + 4 * 60;
 
   const { sunset, sunrise } = SunCalc.getTimes(
-    dayjs().toDate(),
+    now.toDate(),
     48.110686,
     6.562007
   );
 
   const minutesToSunrise =
-    dayjs(sunrise).diff(dayjs().startOf("day").set("hours", 4), "minutes") +
-    4 * 60;
+    dayjs(sunrise).diff(now.startOf("day").set("hours", 4), "minutes") + 4 * 60;
 
   const minutesToSunset =
-    dayjs(sunset).diff(dayjs().startOf("day").set("hours", 4), "minutes") +
-    4 * 60;
+    dayjs(sunset).diff(now.startOf("day").set("hours", 4), "minutes") + 4 * 60;
   const sunsetDuration = 24 * 60 - minutesToSunset;
 
   return (
