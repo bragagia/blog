@@ -109,63 +109,36 @@ function DailyEvents({
 }) {
   let start = 0;
 
+  const events = [
+    { duration: 1.5, name: "Morning routine", classnames: "bg-red-100" },
+    { duration: 4, name: "Work", classnames: "bg-blue-100" },
+    { duration: 1.5, name: "Midi", classnames: "bg-red-100" },
+    { duration: 3, name: "Work", classnames: "bg-blue-100" },
+    { duration: 2, name: "Evening routine", classnames: "bg-red-100" },
+    { duration: 2, name: "Work", classnames: "bg-blue-100" },
+    { duration: 1.5, name: "Bed routine", classnames: "bg-red-100" },
+    { duration: 8.5, name: "Sleep", classnames: "bg-gray-200" },
+  ];
+
+  let nextEventStartAt = wakeUpTime;
+
   return (
     <EventHolder showStick={showStick}>
-      <Event
-        startAt={wakeUpTime.add(0, "minutes")}
-        duration={1.5}
-        classnames="bg-red-100"
-        name="Morning routine"
-      />
+      {events.map((event, i) => {
+        const startAt = nextEventStartAt;
 
-      <Event
-        startAt={wakeUpTime.add((start += 1.5 * 60), "minutes")}
-        duration={4.5}
-        classnames="bg-blue-100"
-        name="Work"
-      />
+        nextEventStartAt = nextEventStartAt.add(event.duration * 60, "minutes");
 
-      <Event
-        startAt={wakeUpTime.add((start += 4.5 * 60), "minutes")}
-        duration={1.5}
-        classnames="bg-red-100"
-        name="Midi"
-      />
-
-      <Event
-        startAt={wakeUpTime.add((start += 1.5 * 60), "minutes")}
-        duration={2.5}
-        classnames="bg-blue-100"
-        name="Work"
-      />
-
-      <Event
-        startAt={wakeUpTime.add((start += 2.5 * 60), "minutes")}
-        duration={2}
-        classnames="bg-red-100"
-        name="Evening routine"
-      />
-
-      <Event
-        startAt={wakeUpTime.add((start += 2 * 60), "minutes")}
-        duration={2}
-        classnames="bg-blue-100"
-        name="Work"
-      />
-
-      <Event
-        startAt={wakeUpTime.add((start += 2 * 60), "minutes")}
-        duration={1.5}
-        classnames="bg-red-100"
-        name="Bed routine"
-      />
-
-      <Event
-        startAt={wakeUpTime.add((start += 1.5 * 60), "minutes")}
-        duration={8.5}
-        classnames="bg-gray-200"
-        name="Sleep"
-      />
+        return (
+          <Event
+            key={i}
+            startAt={startAt}
+            duration={event.duration}
+            name={event.name}
+            classnames={event.classnames}
+          />
+        );
+      })}
     </EventHolder>
   );
 }
