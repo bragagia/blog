@@ -110,12 +110,12 @@ function DailyEvents({
   let start = 0;
 
   const events = [
-    { duration: 1.5, name: "Morning routine", classnames: "bg-red-100" },
-    { duration: 4, name: "Work", classnames: "bg-blue-100" },
+    { duration: 2, name: "Morning routine", classnames: "bg-red-100" },
+    { duration: 3.5, name: "Work", classnames: "bg-blue-100" },
     { duration: 1.5, name: "Midi", classnames: "bg-red-100" },
     { duration: 3, name: "Work", classnames: "bg-blue-100" },
-    { duration: 2, name: "Evening routine", classnames: "bg-red-100" },
-    { duration: 2, name: "Work", classnames: "bg-blue-100" },
+    { duration: 1.5, name: "Evening routine", classnames: "bg-red-100" },
+    { duration: 2.5, name: "Work", classnames: "bg-blue-100" },
     { duration: 1.5, name: "Bed routine", classnames: "bg-red-100" },
     { duration: 8.5, name: "Sleep", classnames: "bg-gray-200" },
   ];
