@@ -36,7 +36,7 @@ export default function HomePage() {
       {/* Header Section - Updated to 2 columns */}
 
       <header className="mb-12">
-        <div className="flex flex-col md:flex-row items-start md:items-end justify-between md:mt-8 mb-8">
+        <div className="flex flex-col md:flex-row items-start md:items-end justify-between  mb-8">
           <div className="flex flex-row my-2 items-end gap-4">
             <div>
               <Image
@@ -49,7 +49,6 @@ export default function HomePage() {
             </div>
 
             <h1 className="prata text-4xl md:text-5xl font-bold">
-              <br />
               Mathias
               <br />
               Bragagia
@@ -157,6 +156,32 @@ export default function HomePage() {
                 prioritization, clean UI/UX, and efficient task handling.
               </li>
             </ul>
+
+            <ul className="space-y-1 group border border-gray-300 p-3 rounded-md">
+              <li className="text-lg font-semibold text-gray-800 josefin mb-1 flex flex-row justify-between items-center">
+                <div>Dome</div>
+                <div className="text-xs text-gray-500 opacity-0 group-hover:opacity-100">
+                  #offline
+                </div>
+              </li>
+              <li className="text-sm text-gray-500 mb-1 font-light">
+                Real estate agent all-in-one tool, from prospecting to closing a
+                deal, including broadcasting to all real estate portals.
+              </li>
+            </ul>
+
+            <ul className="space-y-1 group border border-gray-300 p-3 rounded-md">
+              <li className="text-lg font-semibold text-gray-800 josefin mb-1 flex flex-row justify-between items-center">
+                <div>Splinar</div>
+                <div className="text-xs text-gray-500 opacity-0 group-hover:opacity-100">
+                  #offline
+                </div>
+              </li>
+              <li className="text-sm text-gray-500 mb-1 font-light">
+                CRM hygiene tool automating deduplication and mass operations in
+                Hubspot.
+              </li>
+            </ul>
           </div>
         </SectionContent>
       </section>
@@ -203,7 +228,7 @@ export default function HomePage() {
               <ul className="list-disc list-inside text-gray-800 space-y-1 text-sm font-light marker:text-gray-400">
                 <li>
                   Co-founded and led technology for Splinar, a CRM hygiene tool
-                  automating deduplication and merge operations in Hubspot.
+                  automating deduplication and mass operations in Hubspot.
                 </li>
                 <li>
                   Responsible for architecture, development, and deployment of
