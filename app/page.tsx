@@ -116,9 +116,22 @@ export default function HomePage() {
 
       {/* Side Projects Section */}
       <section className="mb-10">
-        <SectionTitle>Portfolio - Pro & Side Projects</SectionTitle>
+        <SectionTitle>Portfolio - Side Projects</SectionTitle>
         <SectionContent>
           <div className="grid grid-cols-2 gap-x-6 gap-y-5 text-gray-800 text-sm">
+            <ul className="space-y-1 group border border-gray-300 p-3 rounded-md">
+              <li className="text-lg font-semibold text-gray-800 josefin mb-1 flex flex-row justify-between items-center">
+                <div>Splinar</div>
+                <div className="text-xs text-gray-500 opacity-0 group-hover:opacity-100">
+                  #offline
+                </div>
+              </li>
+              <li className="text-sm text-gray-500 mb-1 font-light">
+                CRM hygiene tool automating deduplication and mass operations in
+                Hubspot.
+              </li>
+            </ul>
+
             <ul className="space-y-1 group border border-gray-300 p-3 rounded-md">
               <li className="text-lg font-semibold text-gray-800 josefin mb-1 flex flex-row justify-between items-center">
                 <div>Sunrise Briefing</div>
@@ -127,7 +140,8 @@ export default function HomePage() {
                 </div>
               </li>
               <li className="text-sm text-gray-500 mb-1 font-light">
-                AI-generated daily news summaries delivered each sunrise.
+                Daily news summaries delivered each sunrise. Scrapes all the
+                news, score and summarizes them using ChatGPT.
               </li>
             </ul>
 
@@ -154,32 +168,6 @@ export default function HomePage() {
               <li className="text-sm text-gray-500 mb-1 font-light">
                 Project management-focused todo application with emphasis on
                 prioritization, clean UI/UX, and efficient task handling.
-              </li>
-            </ul>
-
-            <ul className="space-y-1 group border border-gray-300 p-3 rounded-md">
-              <li className="text-lg font-semibold text-gray-800 josefin mb-1 flex flex-row justify-between items-center">
-                <div>Dome</div>
-                <div className="text-xs text-gray-500 opacity-0 group-hover:opacity-100">
-                  #offline
-                </div>
-              </li>
-              <li className="text-sm text-gray-500 mb-1 font-light">
-                Real estate agent all-in-one tool, from prospecting to closing a
-                deal, including broadcasting to all real estate portals.
-              </li>
-            </ul>
-
-            <ul className="space-y-1 group border border-gray-300 p-3 rounded-md">
-              <li className="text-lg font-semibold text-gray-800 josefin mb-1 flex flex-row justify-between items-center">
-                <div>Splinar</div>
-                <div className="text-xs text-gray-500 opacity-0 group-hover:opacity-100">
-                  #offline
-                </div>
-              </li>
-              <li className="text-sm text-gray-500 mb-1 font-light">
-                CRM hygiene tool automating deduplication and mass operations in
-                Hubspot.
               </li>
             </ul>
           </div>
